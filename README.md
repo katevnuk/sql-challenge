@@ -1,26 +1,17 @@
 # A Mystery in Two Parts
 
 
-## Background
-
-Conduct a research project on employees of the corporation from the 1980s and 1990s. All that remain of the database of employees from that period are six CSV files.
-
-Design the tables to hold data in the CSVs, import the CSVs into a SQL database, and answer questions about the data. In other words, perform the following:
-1. Data Modeling
-2. Data Engineering
-3. Data Analysis
-
 
 ## Objectives
 
 ### Data Modeling
-Inspect the CSVs and sketch out an ERD of the tables using QuickDBD
+Inspected the CSVs and sketch out an ERD of the tables using QuickDBD
 
 ![](Images/Entity%20Relationship%20Diagram%20(ERD).png)
 
 ### Data Engineering
-* Use the information to create a table schema for each of the six CSV files. Remember to specify data types, primary keys, foreign keys, and other constraints.
-* Import each CSV file into the corresponding SQL table.
+* Used the information to create a table schema for each of the six CSV files. Remember to specify data types, primary keys, foreign keys, and other constraints.
+* Imported each CSV file into the corresponding SQL table.
 
 ```
 -- Data Engineering --
@@ -110,9 +101,9 @@ SELECT * FROM titles;
 ```
 
 ### Data Analysis
-Once there is a complete database, do the following:
+upon completed database performed the following:
 
-1. List the following details of each employee: employee number, last name, first name, gender, and salary.
+1. Listed the following details of each employee: employee number, last name, first name, gender, and salary.
 ```
 SELECT employees.emp_no, employees.last_name, employees.first_name, employees.gender, salaries.salary
 FROM employees
@@ -120,14 +111,14 @@ JOIN salaries
 ON employees.emp_no = salaries.emp_no;
 ```
 
-2. List employees who were hired in 1986.
+2. Listed employees who were hired in 1986.
 ```
 SELECT first_name, last_name, hire_date 
 FROM employees
 WHERE hire_date BETWEEN '1986-01-01' AND '1987-01-01';
 ```
 
-3. List the manager of each department with the following information: department number, department name, the manager's employee number, last name, first name, and start and end employment dates.
+3. Listed the manager of each department with the following information: department number, department name, the manager's employee number, last name, first name, and start and end employment dates.
 ```
 SELECT departments.dept_no, departments.dept_name, dept_manager.emp_no, employees.last_name, employees.first_name, dept_manager.from_date, dept_manager.to_date
 FROM departments
@@ -137,7 +128,7 @@ JOIN employees
 ON dept_manager.emp_no = employees.emp_no;
 ```
 
-4. List the department of each employee with the following information: employee number, last name, first name, and department name.
+4. Listed the department of each employee with the following information: employee number, last name, first name, and department name.
 ```
 SELECT dept_emp.emp_no, employees.last_name, employees.first_name, departments.dept_name
 FROM dept_emp
@@ -147,7 +138,7 @@ JOIN departments
 ON dept_emp.dept_no = departments.dept_no;
 ```
 
-5. List all employees whose first name is "Hercules" and last names begin with "B."
+5. Listed all employees whose first name is "Hercules" and last names begin with "B."
 ```
 SELECT first_name, last_name
 FROM employees
@@ -155,7 +146,7 @@ WHERE first_name = 'Hercules'
 AND last_name LIKE 'B%';
 ```
 
-6. List all employees in the Sales department, including their employee number, last name, first name, and department name.
+6. Listed all employees in the Sales department, including their employee number, last name, first name, and department name.
 ```
 SELECT dept_emp.emp_no, employees.last_name, employees.first_name, departments.dept_name
 FROM dept_emp
@@ -166,7 +157,7 @@ ON dept_emp.dept_no = departments.dept_no
 WHERE departments.dept_name = 'Sales';
 ```
 
-7. List all employees in the Sales and Development departments, including their employee number, last name, first name, and department name.
+7. Listed all employees in the Sales and Development departments, including their employee number, last name, first name, and department name.
 ```
 SELECT dept_emp.emp_no, employees.last_name, employees.first_name, departments.dept_name
 FROM dept_emp
@@ -178,7 +169,7 @@ WHERE departments.dept_name = 'Sales'
 OR departments.dept_name = 'Development';
 ```
 
-8. In descending order, list the frequency count of employee last names, i.e., how many employees share each last name.
+8. In descending order, listed the frequency count of employee last names, i.e., how many employees share each last name.
 ```
 SELECT last_name,
 COUNT(last_name) AS "frequency"
@@ -187,12 +178,3 @@ GROUP BY last_name
 ORDER BY
 COUNT(last_name) DESC;
 ```
-
-### Bonus
-Generate a visualization of the data by:
-
-1. Importing the SQL database into Pandas.
-2. Create a bar chart of average salary by title.
-3. Include a technical report in markdown format, in which the data engineering steps are outlined.
-
-![](Images/average_salary_by_title.png)
